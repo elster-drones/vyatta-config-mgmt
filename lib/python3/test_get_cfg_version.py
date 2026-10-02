@@ -2,6 +2,7 @@
 """Unit tests for get_cfg_version"""
 
 import unittest
+from unittest.mock import patch
 import get_cfg_version as gcv
 
 class MenuDisplayTest(unittest.TestCase):
@@ -28,6 +29,13 @@ class MenuDisplayTest(unittest.TestCase):
     ENTRY_12 = "12\t2016-11-22 09:38:27 by vyatta\n\tthirteenth\n"
     ENTRY_13 = "13\t2016-11-22 09:38:17 by configd\n\tfourteenth\n"
     ENTRY_14 = "14\t2016-11-22 09:35:31 by configd\n\tfifteenth\n"
+
+    @patch.object(gcv, "print_banner")
+    @patch("builtins.input", side_effect=["1", "", "q"])
+    def test_rejects_index_equal_to_option_count(self, _input, _banner):
+        """The first nonexistent revision must not be accepted."""
+        options = [["", "1475238877", "root", "grub", ""]]
+        self.assertEqual(gcv.display_menu(options), 0)
 
 
     def test_4menu_num_options(self):

@@ -129,7 +129,7 @@ def display_menu(options):
         try:
             revision = int(option)
             if (revision >= first and revision <= last and
-                    revision <= num_entries):
+                    revision < num_entries):
                 break
             else:
                 print("Invalid config version: %s" % option)

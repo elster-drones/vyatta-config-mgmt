@@ -7,7 +7,7 @@ Build-Depends:
  dh-yang,
  dh-vci,
  dh-python,
- python3-all
+ python3-all:native
 Standards-Version: 3.7.2
 X-Python3-Version: >= 3.2
 
